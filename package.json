@@ -1,0 +1,30 @@
+{
+  "name": "9tails-soulbond",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Ramon Canales <rc@matterlabs.dev>",
+  "license": "MIT",
+  "devDependencies": {
+    "@matterlabs/hardhat-zksync-chai-matchers": "^0.1.0",
+    "@matterlabs/hardhat-zksync-deploy": "^0.6.0",
+    "@matterlabs/hardhat-zksync-solc": "^0.3.12",
+    "@matterlabs/zksync-contracts": "^0.4.2",
+    "@nomicfoundation/hardhat-chai-matchers": "^1.0.5",
+    "@nomiclabs/hardhat-ethers": "^2.2.1",
+    "@openzeppelin/contracts": "^4.8.0",
+    "@types/chai": "^4.3.4",
+    "@types/mocha": "^10.0.0",
+    "@types/node": "^18.11.9",
+    "chai": "^4.3.7",
+    "ethers": "^5.7.2",
+    "hardhat": "^2.12.0",
+    "mocha": "^10.1.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4",
+    "zksync-web3": "^0.11.1"
+  },
+  "scripts": {
+    "test": "NODE_ENV=test hardhat test"
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,10 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "PriorityQueue",
+  "sourceName": "@matterlabs/zksync-contracts/l1/contracts/zksync/libraries/PriorityQueue.sol",
+  "abi": [],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
