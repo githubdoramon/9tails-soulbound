@@ -26,9 +26,10 @@ contract NineTailsL1 is NineTailsBase {
         uint256 tokenId,
         address _zkSyncAddress,
         // zkSync block number in which the message was sent
-        uint32 _l2BlockNumber,
+        uint32 _l1BatchNumber,
         // Message index, that can be received via API
-        uint256 _index,
+        uint256 _l1BatchTxIndex,
+        uint256 _l2MessageIndex,
         // Merkle proof for the message
         bytes32[] calldata _proof
     ) external {
@@ -36,13 +37,13 @@ contract NineTailsL1 is NineTailsBase {
 
         IZkSync zksync = IZkSync(_zkSyncAddress);
 
-        bytes memory _message = abi.encode(tokenId, msg.sender);
+        bytes memory _message = abi.encode(tokenId, to);
 
-        L2Message memory message = L2Message({sender: to, data: _message, txNumberInBlock: uint16(_index)});
+        L2Message memory message = L2Message({sender: crossChainCounterpart, data: _message, txNumberInBlock: uint16(_l1BatchTxIndex)});
 
         bool success = zksync.proveL2MessageInclusion(
-            _l2BlockNumber,
-            _index,
+            _l1BatchNumber,
+            _l2MessageIndex,
             message,
             _proof
         );

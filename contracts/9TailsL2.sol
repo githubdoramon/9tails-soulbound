@@ -1,8 +1,7 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
 import "./9TailsBase.sol";
-import "@matterlabs/zksync-contracts/l1/contracts/zksync/interfaces/IZkSync.sol";
 import "@matterlabs/zksync-contracts/l2/system-contracts/Constants.sol";
 
 contract NineTailsL2 is NineTailsBase {
