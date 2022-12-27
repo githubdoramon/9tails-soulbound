@@ -384,15 +384,7 @@
   resolved "https://registry.yarnpkg.com/@matterlabs/hardhat-zksync-deploy/-/hardhat-zksync-deploy-0.6.0.tgz#c24a79e325344511adb023062205dbc312efdf01"
   integrity sha512-Gu7Zuzyx+YipyyKVtGjQ+EYWGtDmPLhH4oStyVLjIGWfdawT+AWUYxe6nwrIYGOxqI5RcGdGIDd5NANAOJKgjA==
 
-"@matterlabs/hardhat-zksync-solc@0.3.10":
-  version "0.3.10"
-  resolved "https://registry.yarnpkg.com/@matterlabs/hardhat-zksync-solc/-/hardhat-zksync-solc-0.3.10.tgz#a492153f85b7b4dc2cea3d10de50479d367d0e7a"
-  integrity sha512-z1nJyjU1FsOteIw9QcLniRXz2G3Uy6Jhxf+tIqdW7LAqkL+j9ysbwV3j5DJz4ZkSC3V3P7EvBq/q36A0pStLjg==
-  dependencies:
-    "@nomiclabs/hardhat-docker" "^2.0.0"
-    dockerode "^3.3.4"
-
-"@matterlabs/hardhat-zksync-solc@^0.3.12":
+"@matterlabs/hardhat-zksync-solc@0.3.12":
   version "0.3.12"
   resolved "https://registry.yarnpkg.com/@matterlabs/hardhat-zksync-solc/-/hardhat-zksync-solc-0.3.12.tgz#0caeb0a2aac1d66057988b981a4d1c72ff614a1e"
   integrity sha512-0py4bsqphPYJV1Ub7jlCkMP2lEENIB16jv700rNnikJJn251ofQgzowcspJw+/WchP+Tu4tJSRL0a1MVngtCoQ==
@@ -400,13 +392,22 @@
     "@nomiclabs/hardhat-docker" "^2.0.0"
     dockerode "^3.3.4"
 
-"@matterlabs/hardhat-zksync-verify@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@matterlabs/hardhat-zksync-verify/-/hardhat-zksync-verify-0.1.0.tgz#3151fdb7020017092bf60a26cd2476967f2a39b7"
-  integrity sha512-vFrAy9p/xSwvDZmc5Umbb+ohNPB65OpqjL2zB2yr8qbC2WDvBC3ncpWjmvx2QPELzJcx4i9UNRl1yv371NVE9w==
+"@matterlabs/hardhat-zksync-solc@^0.3.12":
+  version "0.3.13"
+  resolved "https://registry.yarnpkg.com/@matterlabs/hardhat-zksync-solc/-/hardhat-zksync-solc-0.3.13.tgz#ff3401b164ebfde6feb2a8fac8639cf39f9b4954"
+  integrity sha512-QuU3CfaY17SQbRxk7VvheJt+bBvWOSNaeo4hWedWXWdIa6d2Y8lQqf6QmYTFMqJg39Z+bx+uuVm2qzzLI4x0SQ==
   dependencies:
-    "@matterlabs/hardhat-zksync-solc" "0.3.10"
-    axios "^1.1.3"
+    "@nomiclabs/hardhat-docker" "^2.0.0"
+    chalk "4.1.2"
+    dockerode "^3.3.4"
+
+"@matterlabs/hardhat-zksync-verify@^0.1.0":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@matterlabs/hardhat-zksync-verify/-/hardhat-zksync-verify-0.1.1.tgz#0f40b08e7dd7f8aafdb7ce0cb0888599fe8e9a64"
+  integrity sha512-RTV1tlyAGm/PZ30RLwiSODoZnduInelTSqTEjFE029s4zJJWmK4RZ1iscDdK5iPlsibMizQAEbu8ogQs3gTjMw==
+  dependencies:
+    "@matterlabs/hardhat-zksync-solc" "0.3.12"
+    axios "^1.2.1"
     dockerode "^3.3.4"
 
 "@matterlabs/zksync-contracts@^0.4.1":
@@ -837,9 +838,9 @@
   integrity sha512-/fvYntiO1GeICvqbQ3doGDIP97vWmvFt83GKguJ6prmQM2iXZfFcq6YE8KteFyRtX2/h5Hf91BYvPodJKFYv5Q==
 
 "@types/node@*", "@types/node@^18.11.9":
-  version "18.11.16"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.16.tgz#966cae211e970199559cfbd295888fca189e49af"
-  integrity sha512-6T7P5bDkRhqRxrQtwj7vru+bWTpelgtcETAZEUSdq0YISKz8WKdoBukQLYQQ6DFHvU9JRsbFq0JH5C51X2ZdnA==
+  version "18.11.17"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.17.tgz#5c009e1d9c38f4a2a9d45c0b0c493fe6cdb4bcb5"
+  integrity sha512-HJSUJmni4BeDHhfzn6nF0sVmd1SMezP7/4F0Lq+aXzmp2xm9O7WXrUtHW/CHlYVtZUbByEvWidHqRtcJXGF2Ng==
 
 "@types/pbkdf2@^3.0.0":
   version "3.1.0"
@@ -1018,7 +1019,7 @@ asynckit@^0.4.0:
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==
 
-axios@^1.1.3:
+axios@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/axios/-/axios-1.2.1.tgz#44cf04a3c9f0c2252ebd85975361c026cb9f864a"
   integrity sha512-I88cFiGu9ryt/tfVEi4kX2SITsvDddTajXTOFmt2uK1ZVA8LytjtdeyefdQWEf5PU8w+4SSJDoYnggflB5tW4A==
@@ -1057,9 +1058,9 @@ bech32@1.1.4:
   integrity sha512-s0IrSOzLlbvX7yp4WBfPITzpAU8sqQcpsmwXDiKwrG4r491vwCO/XpejasRNl0piBMe/DvP4Tz0mIS/X1DPJBQ==
 
 bigint-crypto-utils@^3.0.23:
-  version "3.1.7"
-  resolved "https://registry.yarnpkg.com/bigint-crypto-utils/-/bigint-crypto-utils-3.1.7.tgz#c4c1b537c7c1ab7aadfaecf3edfd45416bf2c651"
-  integrity sha512-zpCQpIE2Oy5WIQpjC9iYZf8Uh9QqoS51ZCooAcNvzv1AQ3VWdT52D0ksr1+/faeK8HVIej1bxXcP75YcqH3KPA==
+  version "3.1.8"
+  resolved "https://registry.yarnpkg.com/bigint-crypto-utils/-/bigint-crypto-utils-3.1.8.tgz#e2e0f40cf45488f9d7f0e32ff84152aa73819d5d"
+  integrity sha512-+VMV9Laq8pXLBKKKK49nOoq9bfR3j7NNQAtbA617a4nw9bVLo8rsqkKMBgM2AJWlNX9fEIyYaYX+d0laqYV4tw==
   dependencies:
     bigint-mod-arith "^3.1.0"
 
@@ -1281,6 +1282,14 @@ chai@^4.3.7:
     pathval "^1.1.1"
     type-detect "^4.0.5"
 
+chalk@4.1.2, chalk@^4.1.0:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
+  integrity sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==
+  dependencies:
+    ansi-styles "^4.1.0"
+    supports-color "^7.1.0"
+
 chalk@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"
@@ -1289,14 +1298,6 @@ chalk@^2.4.2:
     ansi-styles "^3.2.1"
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
-
-chalk@^4.1.0:
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
-  integrity sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==
-  dependencies:
-    ansi-styles "^4.1.0"
-    supports-color "^7.1.0"
 
 check-error@^1.0.2:
   version "1.0.2"
@@ -2010,9 +2011,9 @@ ieee754@^1.1.13, ieee754@^1.2.1:
   integrity sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==
 
 immutable@^4.0.0-rc.12:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/immutable/-/immutable-4.1.0.tgz#f795787f0db780183307b9eb2091fcac1f6fafef"
-  integrity sha512-oNkuqVTA8jqG1Q6c+UglTOD1xhC1BtjKI7XkCXRkZHrN5m18/XsnUp8Q89GkQO/z+0WjonSvl0FLhDYftp46nQ==
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/immutable/-/immutable-4.2.1.tgz#8a4025691018c560a40c67e43d698f816edc44d4"
+  integrity sha512-7WYV7Q5BTs0nlQm7tl92rDYYoyELLKHoDMBKhrxEoiV4mrfVdRz8hzPiYOzH7yWjzoVEamxRuAqhxL2PLRwZYQ==
 
 indent-string@^4.0.0:
   version "4.0.0"
@@ -3167,6 +3168,6 @@ yocto-queue@^0.1.0:
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 
 zksync-web3@^0.12.2:
-  version "0.12.2"
-  resolved "https://registry.yarnpkg.com/zksync-web3/-/zksync-web3-0.12.2.tgz#2b9e46c0a89efbd74de423419adafb7cc58b9967"
-  integrity sha512-2IkKUBEfsnzzV18e+ebbOOVLfKlOEAOiRRbtuSp49X4WPvhILugP1whNjkVCHg80OJYiIg2EOwf/grwoK8QwCQ==
+  version "0.12.3"
+  resolved "https://registry.yarnpkg.com/zksync-web3/-/zksync-web3-0.12.3.tgz#2aaa61ffa4c7c14e892a54d12cbb1e1da5c992e8"
+  integrity sha512-oGmtC7gsKXfIc7AIObOcaDp5EJMN38Q2rnh1CnZpy2NWKyPZ4WGxiJvpRH96TlYcDoU4hyhsKfFWC3JO7dipTQ==

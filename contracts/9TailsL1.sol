@@ -17,8 +17,9 @@ contract NineTailsL1 is NineTailsBase {
     ) external {
         require(msg.sender == ownerOf(tokenId), "Only owner can transfer token to L2");
         IZkSync zksync = IZkSync(zkSyncAddress);
-        zksync.requestL2Transaction{value: 0}(crossChainCounterpart, 0, abi.encodePacked(string.concat("receiveFromL1(",Strings.toString(tokenId),",",Strings.toHexString(uint256(uint160(ownerOf(tokenId))), 20),")")), 10000, new bytes[](0));
+        zksync.requestL2Transaction{value: 0}(crossChainCounterpart, 0, abi.encodeWithSignature('receiveFromL1(uint256,address)', tokenId, ownerOf(tokenId)), 100000, new bytes[](0));
         _burn(tokenId);
+        emit SentToLayer(2);
     }
 
     function receiveFromL2(
@@ -51,7 +52,7 @@ contract NineTailsL1 is NineTailsBase {
         require(success, "Failed to prove message inclusion");
 
         _mint(to, tokenId);
-        emit SentToLayer(1);
+        emit ReceivedOnLayer(1);
     }
 
     function _whichLayerIsToken(uint tokenId) override internal view returns (uint layer) {

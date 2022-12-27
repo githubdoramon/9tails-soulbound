@@ -22,10 +22,10 @@ async function deployL2(deployer: Deployer): Promise<Contract> {
 
 describe('NineTails', function () {
 
-  let provider: zk.Provider, nineTailsL1: Contract | null = null, nineTailsL2: Contract | null = null
+  let provider: zk.Provider, nineTailsL1: Contract | null = null, nineTailsL2: Contract | null = null, wallet: Wallet | null
 
   before(async function () {
-    const wallet = new Wallet(RICH_WALLET_PK, provider);
+    wallet = new Wallet(RICH_WALLET_PK, provider);
 
     const l1Provider = new ethers.providers.JsonRpcProvider(hre.config.networks.zkTestnet.ethNetwork)
     const l1Deployer = new ethers.Wallet(wallet.privateKey, l1Provider)
@@ -48,13 +48,10 @@ describe('NineTails', function () {
   });
 
   it("Should deploy contract and mint them all on L2", async function () {
-
-    const wallet = new Wallet(RICH_WALLET_PK, provider);
-
     expect(await nineTailsL2!.name()).to.eq('The Nine Tails');
     expect(await nineTailsL2!.symbol()).to.eq('TAIL');
-    expect(await nineTailsL2!.ownerOf(0)).to.eq(wallet.address);
-    expect(await nineTailsL2!.ownerOf(8)).to.eq(wallet.address);
+    expect(await nineTailsL2!.ownerOf(0)).to.eq(wallet!.address);
+    expect(await nineTailsL2!.ownerOf(8)).to.eq(wallet!.address);
   });
 
   it("Should deploy contract on L1 and have no NFTs", async function () {
@@ -63,25 +60,21 @@ describe('NineTails', function () {
   });
 
   it("Should be able to remove from address", async function () {
-
-    const wallet = new Wallet(RICH_WALLET_PK, provider);
     const wallet2 = new Wallet(RICH_WALLET_PK_2, provider);
     
-    const theTransfer = nineTailsL2!.transferFrom(wallet.address, wallet2.address, 0)
+    const theTransfer = nineTailsL2!.transferFrom(wallet!.address, wallet2.address, 0)
 
     await expect(theTransfer).to.emit(nineTailsL2, "Transfer");
     expect(await nineTailsL2!.ownerOf(0)).to.eq(wallet2.address);
   });
 
    it("Can send from L2 to L1", async function () {
-
-     
-    const wallet = new Wallet(RICH_WALLET_PK, provider);
-    const messageHash = keccak256(ethers.utils.defaultAbiCoder.encode([ "uint256", "address" ], [ 1, wallet.address ]))
+    const messageHash = keccak256(ethers.utils.defaultAbiCoder.encode([ "uint256", "address" ], [ 1, wallet!.address ]))
     expect(await nineTailsL2!.whichLayerIsToken(1)).to.eq(2);
     expect(await nineTailsL1!.whichLayerIsToken(1)).to.eq(2);
 
     const transferTx = await nineTailsL2!.transferToL1(1)
+    await expect(transferTx).to.emit(nineTailsL2, "SentToLayer");
     const receipt = await transferTx.waitFinalize();
 
     const l2ToL1LogIndex = receipt.l2ToL1Logs.findIndex(
@@ -91,19 +84,30 @@ describe('NineTails', function () {
     const msgProof = await provider.getLogProof(receipt.transactionHash, l2ToL1LogIndex);
     
     const zkSyncAddress = await provider.getMainContractAddress();
-    const tx = nineTailsL1!.receiveFromL2(wallet.address, 1, zkSyncAddress, receipt.l1BatchNumber, receipt.l1BatchTxIndex, msgProof!.id, msgProof!.proof)
-    await expect(tx).to.emit(nineTailsL1, "SentToLayer");
-    expect(await nineTailsL1!.ownerOf(1)).to.eq(wallet.address);
+    const tx = nineTailsL1!.receiveFromL2(wallet!.address, 1, zkSyncAddress, receipt.l1BatchNumber, receipt.l1BatchTxIndex, msgProof!.id, msgProof!.proof)
+    await expect(tx).to.emit(nineTailsL1, "ReceivedOnLayer");
+    expect(await nineTailsL1!.ownerOf(1)).to.eq(wallet!.address);
     expect(await nineTailsL2!.whichLayerIsToken(1)).to.eq(1);
     expect(await nineTailsL1!.whichLayerIsToken(1)).to.eq(1);
   });
 
-  it("Should fail trying to transfer to other address or L1", async function () {
+  it("Can send from back L1 to L2", async function () {
+    const tx = await nineTailsL1!.transferToL2(1, provider.getMainContractAddress())
+    await tx.wait()
+    await expect(tx).to.emit(nineTailsL1, "SentToLayer");
+    
+    const txL2Handle = await provider.getPriorityOpResponse(tx);
+    await txL2Handle.wait()
 
-    const wallet = new Wallet(RICH_WALLET_PK, provider);
+    await expect(txL2Handle).to.emit(nineTailsL2, "ReceivedOnLayer");
+    expect(await nineTailsL2!.whichLayerIsToken(1)).to.eq(2);  
+    expect(await nineTailsL1!.whichLayerIsToken(1)).to.eq(2);  
+  }); 
+
+  it("Should fail trying to transfer to other address or L1", async function () {
     const wallet2 = new Wallet(RICH_WALLET_PK_2, provider);
 
-    await expect(nineTailsL2!.connect(wallet2).transferFrom(wallet2.address, wallet.address, 0)).to.be.revertedWith("Ownable: caller is not the owner");
+    await expect(nineTailsL2!.connect(wallet2).transferFrom(wallet2.address, wallet!.address, 0)).to.be.revertedWith("Ownable: caller is not the owner");
     await expect(nineTailsL2!.transferToL1(0)).to.be.revertedWith("Only owner can transfer token to L2");
   });
 

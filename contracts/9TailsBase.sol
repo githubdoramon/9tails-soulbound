@@ -9,6 +9,9 @@ abstract contract NineTailsBase is ERC721, ERC721URIStorage, ERC721Burnable, Own
 
     address public crossChainCounterpart;
     event SentToLayer(uint layer);
+    event ReceivedOnLayer(uint layer);
+    event PermanentURI(string _value, uint256 indexed _id);
+
 
     constructor() ERC721("The Nine Tails", "TAIL") {
     }
@@ -18,10 +21,8 @@ abstract contract NineTailsBase is ERC721, ERC721URIStorage, ERC721Burnable, Own
     }
 
     function _baseURI() internal pure override returns (string memory) {
-        return "https://ramon";
+        return "ipfs://QmdUGAcAiCg79suNUTVxdsB3NyBievR1NLjrzdUMWe1rwk/";
     }
-
-    // The following functions are overrides required by Solidity.
 
     function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
         super._burn(tokenId);

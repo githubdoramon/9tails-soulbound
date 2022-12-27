@@ -16,6 +16,16 @@ contract NineTailsL2 is NineTailsBase {
         _mint(msg.sender, 6);
         _mint(msg.sender, 7);
         _mint(msg.sender, 8);
+        emit PermanentURI(tokenURI(0),0);
+        emit PermanentURI(tokenURI(1),1);
+        emit PermanentURI(tokenURI(2),2);
+        emit PermanentURI(tokenURI(3),3);
+        emit PermanentURI(tokenURI(4),4);
+        emit PermanentURI(tokenURI(5),5);
+        emit PermanentURI(tokenURI(6),6);
+        emit PermanentURI(tokenURI(7),7);
+        emit PermanentURI(tokenURI(8),8);
+
     }
 
      function transferToL1(
@@ -25,6 +35,7 @@ contract NineTailsL2 is NineTailsBase {
         bytes memory message = abi.encode(tokenId, msg.sender);
         L1_MESSENGER_CONTRACT.sendToL1(message);
         _burn(tokenId);
+        emit SentToLayer(1);
     }
 
     function receiveFromL1(
@@ -33,7 +44,7 @@ contract NineTailsL2 is NineTailsBase {
     ) external {
         require(msg.sender == crossChainCounterpart, "Only the right counterpart can call the transfer");
         _mint(destination, tokenId);
-        emit SentToLayer(2);
+        emit ReceivedOnLayer(2);
     }
 
       function _whichLayerIsToken(uint tokenId) override internal view returns (uint layer) {

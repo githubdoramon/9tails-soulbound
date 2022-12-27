@@ -1,0 +1,12 @@
+{
+    "description": "The Tails of the 9 Tailed Wize Fox - 9tails.eth", 
+    "image": "https://storage.googleapis.com/opensea-prod.appspot.com/puffs/3.png", 
+    "name": "The 1 year Tail",
+    "attributes": [ 
+        {
+            "display_type": "number", 
+            "trait_type": "Years of evolution", 
+            "value": 1
+        }
+     ]
+  }
